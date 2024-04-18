@@ -6,12 +6,15 @@ const searchImage = async(term) => {
 
     const response = await axios.get(url, {
     params: {
-        query: 'cars'
+        query: term
     }
 
 })
 
+    console.log(term)
     console.log(response)
+
+    return response.data.results
 
 
 }

@@ -10,7 +10,14 @@ function App() {
 
   const handleSubmit = async(term)=> {
 
-    console.log('uste esta buscando con:', term)
+    console.log('usted esta buscando con:', term)
+    const result = await searchImage(term)
+
+    console.log('coco')
+
+    console.log(result)
+
+    setImages(result)
 
   }
 
@@ -20,6 +27,8 @@ function App() {
         <h1>App</h1>
 
         <SearchBar onSubmit={handleSubmit} />
+
+        <ImageList images={images} />
 
       </div>
   )
