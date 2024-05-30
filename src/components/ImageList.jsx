@@ -1,17 +1,17 @@
-import ImageShow from './ImageShow'
-import './ImageList.css'
+import React from 'react';
+import ImageShow from './ImageShow';
 
-function ImageList({images}){
-    const renderImages = images.map((image) => {
-        return <ImageShow key={image.id} image={image}/>
-    })
-        
-        return (
+function ImageList({ characters }) {
+    console.log(characters);
+    
+
+    return (
         <div className='image-list'>
-         {renderImages}
+            {characters.map((character) => (
+                <ImageShow key={character.id} character={character} />
+            ))}
         </div>
-        )
+    );
+}
 
-    }
-
-    export default ImageList
+export default ImageList;

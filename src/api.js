@@ -1,23 +1,19 @@
-import axios from 'axios'
-import App from './App'
+import axios from 'axios';
+const searchCharacter = async (query) => {
+    try {
+        if (typeof query !== 'string') {
+            // Manejar el caso donde query no es una cadena de texto
+            return [];
+        }
 
-const searchImage = async(term) => {
-
-    const url = 'http://api.unsplash.com/search/photos/?client_id=y2FHPEHwiqLd3FojpjMxWKzO-yZ3dH7_nutgS_IXIs4'
-
-    const response = await axios.get(url, {
-    params: {
-        query: term
+        const response = await axios.get('https://rickandmortyapi.com/api/character/');
+        const filteredCharacters = response.data.results.filter(character =>
+            character.name.toLowerCase() === query.toLowerCase() || character.id.toString() === query
+        );
+        return filteredCharacters;
+    } catch (error) {
+        console.error('Error fetching characters:', error);
+        return [];
     }
-
-})
-
-    console.log(term)
-    console.log(response)
-
-    return response.data.results
-
-
-}
-
-export default searchImage
+};
+export default searchCharacter;

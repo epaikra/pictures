@@ -1,39 +1,29 @@
-import { useState } from "react"
-import './SearchBar.css'
+import { useState } from "react";
+import './SearchBar.css';
+import searchImage from '../api';
 
-function SearchBar({ onSubmit }){
+function SearchBar({ onSubmit }) {
+    const [term, setTerm] = useState('');
 
-    const [term, setTerm] = useState('')
-
-    const handleFormSubmit = (event) => {
-        event.preventDefault()
-        console.log('Necesito decirle al componente padre sobre los datos')
-        onSubmit(term)
-    }
+    const handleFormSubmit = async (event) => {
+        event.preventDefault();
+        const characters = await searchImage(term);
+        onSubmit(characters);
+    };
 
     const handleChange = (event) => {
-        console.log(event.target.value)
-        setTerm(event.target.value)
-    }
+        setTerm(event.target.value);
+    };
 
-    const handleClick = () => {
-        onSubmit(term)
-    }
-
-    return(
+    return (
         <div className="search-bar">
-            
-        
             <form onSubmit={handleFormSubmit}>
-
                 <label htmlFor="">Picture Search</label>
-
-                <input onChange={handleChange} value={term}/>
-
+                <input onChange={handleChange} value={term} />
+                <button type="submit">Search</button>
             </form>
-            
         </div>
-    )
-    }
+    );
+}
 
-    export default SearchBar
+export default SearchBar;
